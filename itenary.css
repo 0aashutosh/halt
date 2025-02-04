@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-image: url(images/mainBG\ image.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: rgba(31, 35, 39, 0.9);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: calc(100vh - 160px);
+}
+
+.form-section {
+    background-color: rgba(102, 83, 83, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.activity-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+#recommendation {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+footer {
+    background-color: rgba(52, 58, 64, 0.9);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.budget-display {
+    font-size: 1.2em;
+    margin: 15px 0;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.activity-cost {
+    color: #28a745;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.footer-container {
+    background-color: #424242;
+    padding: 40px 20px;
+    margin-top: 50px;
+}
+
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-div {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-div h6 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.footer-div p,
+.footer-div address {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.links img {
+    width: 24px;
+    height: 24px;
+}
+
+.links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.links a:hover {
+    color: #fff;
+}
+
+.head p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+main {
+    padding-bottom: 100px;
+}

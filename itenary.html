@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Travel Planner</title>
+    <link rel="stylesheet" href="itenary.css">
+</head>
+<body>
+    <header>
+        <h1>Itenaries</h1>
+    </header>
+
+    <main>
+        <div class="form-section">
+            <div class="form-group">
+                <label>Start Date:</label>
+                <input type="date" id="startDate" required>
+            </div>
+
+            <div class="form-group">
+                <label>End Date:</label>
+                <input type="date" id="endDate" required>
+            </div>
+
+            <div class="form-group">
+                <label>Destination:</label>
+                <select id="destination" onchange="updateActivities()" required>
+                    <option value="">Select Destination</option>
+                    <option value="kathmandu">Kathmandu</option>
+                    <option value="pokhara">Pokhara</option>
+                    <option value="chitwan">Chitwan</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="activitiesContainer">
+                <!-- Activities will be populated here based on destination -->
+            </div>
+
+            <div class="form-group">
+                <label>Total Budget ($):</label>
+                <input type="number" id="totalBudget" required>
+            </div>
+
+            <button onclick="calculateBudget()">Calculate Budget</button>
+
+            <div class="budget-display">
+                Estimated Cost: $<span id="estimatedCost">0</span>
+            </div>
+
+            <div id="recommendation"></div>
+        </div>
+    </main>
+
+    <div class="footer-container">
+        <div class="footer">
+            <div class="footer-div">
+                <div class="head">
+                    <p>Yatra-Z</p>
+                </div>
+                <h6>Product</h6>
+                <p>landing page</p>
+                <p>Exploration</p>
+                <p>Reservation</p>
+            </div>
+            <div class="footer-div">
+                <h6>Trip services</h6>
+                <p>Trip Booking</p>
+                <p>Itinerary planning</p>
+                <p>Tourist Guide</p>
+            </div>
+            <div class="footer-div">
+                <h6>Contact Info</h6>
+                <p>support@yatraz.com</p>
+                <p>+977 9876543210</p>
+                <address>Kamalpokhari, Kathmandu</address>
+            </div>
+            <div class="footer-div">
+                <h6>Social Media links</h6>
+                <div class="links">
+                    <img src="images/icons8-instagram-50.png" alt="instagram" class="image">
+                    <a href="#">instagram.com</a>
+                </div>        
+                <div class="links">
+                    <img src="images/facebook icon.png" alt="facebook" class="image">
+                    <a href="#">facebook.com</a>
+                </div>        
+                <div class="links">
+                    <img src="images/icons8-twitter-50.png" alt="twitter" class="image">
+                    <a href="#">Twitter.com</a>
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Date validation logic
+        document.getElementById('startDate').addEventListener('change', function() {
+            const startDate = this.value;
+            const endDateField = document.getElementById('endDate');
+            endDateField.min = startDate;
+            
+            if (endDateField.value < startDate) {
+                endDateField.value = startDate;
+            }
+        });
+
+        document.getElementById('endDate').addEventListener('change', function() {
+            const startDate = document.getElementById('startDate').value;
+            if (this.value < startDate) {
+                alert("End date cannot be before start date!");
+                this.value = startDate;
+            }
+        });
+
+        const activities = {
+            kathmandu: [
+                { name: "Pashupatinath Temple", cost: 15 },
+                { name: "Boudhanath Stupa", cost: 10 },
+                { name: "Kathmandu Durbar Square", cost: 12 },
+                { name: "Swayambhunath Temple", cost: 10 }
+            ],
+            pokhara: [
+                { name: "Phewa Lake Boating", cost: 20 },
+                { name: "World Peace Pagoda", cost: 10 },
+                { name: "Davis Falls", cost: 5 },
+                { name: "Sarangkot Sunrise", cost: 15 }
+            ],
+            chitwan: [
+                { name: "Jungle Safari", cost: 50 },
+                { name: "Elephant Breeding Center", cost: 20 },
+                { name: "Canoe Ride", cost: 15 },
+                { name: "Tharu Cultural Show", cost: 10 }
+            ]
+        };
+
+        function updateActivities() {
+            const destination = document.getElementById('destination').value;
+            const container = document.getElementById('activitiesContainer');
+            container.innerHTML = '<label>Activities:</label>';
+
+            if (destination && activities[destination]) {
+                activities[destination].forEach(activity => {
+                    const div = document.createElement('div');
+                    div.className = 'activity-item';
+                    div.innerHTML = `
+                        <input type="checkbox" class="activity" value="${activity.name}">
+                        ${activity.name} 
+                        <span class="activity-cost">$${activity.cost}</span>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        function calculateBudget() {
+            let total = 0;
+            const destination = document.getElementById('destination').value;
+            
+            document.querySelectorAll('.activity:checked').forEach(checkbox => {
+                const activityName = checkbox.value;
+                const activity = activities[destination].find(a => a.name === activityName);
+                if (activity) total += activity.cost;
+            });
+
+            const estimatedCost = document.getElementById('estimatedCost');
+            estimatedCost.textContent = total;
+
+            const totalBudget = parseFloat(document.getElementById('totalBudget').value) || 0;
+            const recommendation = document.getElementById('recommendation');
+            
+            if (total === 0) {
+                recommendation.textContent = "Please select activities";
+                recommendation.style.backgroundColor = "#ffc107";
+                return;
+            }
+
+            if (total > totalBudget) {
+                recommendation.textContent = `Over Budget by $${total - totalBudget}! Adjust your plans`;
+                recommendation.style.backgroundColor = "#dc3545";
+                recommendation.style.color = "white";
+            } else {
+                recommendation.textContent = `Under Budget by $${totalBudget - total}! Ready to go!`;
+                recommendation.style.backgroundColor = "#28a745";
+                recommendation.style.color = "white";
+            }
+        }
+    </script>
+</body>
+</html>
