@@ -12,13 +12,37 @@ body {
     min-height: 100vh;
 }
 
+/* Header Styles */
 header {
     background-color: rgba(31, 35, 39, 0.9);
-    color: white;
-    padding: 20px;
-    text-align: center;
+    padding: 15px 20px;
+    position: relative;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 50px; /* Adjust based on your logo size */
+    height: auto;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+header h1 {
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+/* Main Content Styles */
 main {
     padding: 30px 20px;
     max-width: 800px;
@@ -66,16 +90,6 @@ input, select {
     text-align: center;
 }
 
-footer {
-    background-color: rgba(52, 58, 64, 0.9);
-    color: white;
-    text-align: center;
-    padding: 15px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
 .budget-display {
     font-size: 1.2em;
     margin: 15px 0;
@@ -99,6 +113,8 @@ button:hover {
     font-weight: bold;
     margin-left: 10px;
 }
+
+/* Footer Styles */
 .footer-container {
     background-color: #424242;
     padding: 40px 20px;
@@ -163,6 +179,29 @@ button:hover {
     margin-bottom: 20px;
 }
 
-main {
-    padding-bottom: 100px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wrapper {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .links {
+        justify-content: center;
+    }
+}
+
+@media (max-height: 700px) {
+    .wrapper {
+        margin: 20px auto;
+    }
+    
+    .footer-container {
+        padding: 20px;
+    }
 }
